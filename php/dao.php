@@ -17,7 +17,7 @@ abstract class DAO{
 	public abstract function close();
 	public abstract function getAllEntrys();
 	public abstract function getEntry($id);
-	public abstract function insertEntry($data)
+	public abstract function insertEntry($data);
 	public abstract function deleteEntry($id);
 }
 
@@ -37,7 +37,7 @@ class ProjectDAO extends DAO{
 		}
 		$res = $stmt->get_result();
 		if($res->num_rows > 0){
-			while($row = $res->fetch_assoc(){
+			while($row = $res->fetch_assoc()){
 			$entrys[] = $row;
 			}
 		}
@@ -52,7 +52,7 @@ class ProjectDAO extends DAO{
 		if(!$stmt = $conn->prepare("SELECT * FROM tProject where p_id = ?")){
 			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 		}
-		if(!$stmt->bind_param("i",$id){
+		if(!$stmt->bind_param("i",$id)){
 			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
 		if(!$stmt->execute()){
@@ -60,7 +60,7 @@ class ProjectDAO extends DAO{
 		}
 		$res = $stmt->get_result();
 		if($res->num_rows > 0){
-			while($row = $res->fetch_assoc(){
+			while($row = $res->fetch_assoc()){
 			$entry = $row;
 			}
 		}
