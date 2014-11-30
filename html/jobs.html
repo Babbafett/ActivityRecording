@@ -22,9 +22,17 @@
 		include 'navbar.html';
 	?>
 
-	<div class="container">
-	<h1>Manage your jobs</h1>
-	</div>
+		<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+<div class="row">
+  <div class="col-xs-6 col-md-4"></div>
+  <div class="col-xs-6 col-md-4">
+  <h1>Manage your jobs</h1>
+  	<?php
+		include '../php/jobs.php';
+	?>
+  </div>
+  <div class="col-xs-6 col-md-4"></div>
+</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
