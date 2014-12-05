@@ -1,3 +1,5 @@
+use dbactivityrecording;
+
 delete from t_sub_project where sp_id between 0 and 1000;
 delete from t_project where p_id between 0 and 1000;
 delete from t_customer where k_id between 0 and 1000;
