@@ -4,9 +4,9 @@ $dao = new ProjectDAO ();
 
 $dao->connect ();
 
-$jobs = new SubProjectDAO();
+$customer = new CustomerDAO();
 
-$jobs->connect();
+$customer->connect();
 
 $result = $dao->getAllEntrys ();
 
@@ -14,7 +14,7 @@ echo "<table class='table table-hover table-condensed'>";
 // echo "<caption>Manage your customers</caption>";
 echo "<thead>";
 echo "<tr>";
-echo "<th>ID</th>";
+echo "<th>Customer</th>";
 echo "<th>Description</th>";
 echo "<th></th>";
 echo "</tr>";
@@ -25,7 +25,8 @@ echo "<tbody>";
 foreach ( $result as $row ) {
 	
 	echo "<tr>";
-	echo "<td>" . $row ['p_id'] . "</td>";
+	$resultCust = $customer->getEntry($row['k_id']);
+	echo "<td>" . $resultCust ['name'] . "</td>";
 	echo "<td>" . $row ['description'] . "</td>";
 	
 	$params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&edit=1\"";

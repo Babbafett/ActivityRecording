@@ -138,7 +138,7 @@ class CustomerDAO extends DAO {
 
 	public function getEntry($id) {
 		$entry = null;
-		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_project WHERE k_id = ?")) {
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_customer WHERE k_id = ?")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
 		if (!$stmt -> bind_param("i", $id)) {

@@ -4,13 +4,22 @@ $dao = new SubProjectDAO ();
 
 $dao->connect ();
 
+$customer = new CustomerDAO();
+
+$customer->connect();
+
+$project = new ProjectDAO();
+
+$project->connect();
+
 $result = $dao->getAllEntrys ();
 
 echo "<table class='table table-hover table-condensed'>";
 // echo "<caption>Manage your customers</caption>";
 echo "<thead>";
 echo "<tr>";
-echo "<th>ID</th>";
+echo "<th>Customer</th>";
+echo "<th>Project</th>";
 echo "<th>Position</th>";
 echo "<th>Description</th>";
 echo "<th></th>";
@@ -22,7 +31,10 @@ echo "<tbody>";
 foreach ( $result as $row ) {
 	
 	echo "<tr>";
-	echo "<td>" . $row ['sp_id'] . "</td>";
+	$resultProject = $project->getEntry($row['p_id']);
+	$resultCust = $customer->getEntry($resultProject['k_id']);
+	echo "<td>" . $resultCust ['name'] . "</td>";
+	echo "<td>" . $resultProject ['description'] . "</td>";
 	echo "<td>" . $row ['position'] . "</td>";
 	echo "<td>" . $row ['description'] . "</td>";	
 	
