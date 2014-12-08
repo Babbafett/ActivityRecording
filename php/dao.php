@@ -163,7 +163,7 @@ class CustomerDAO extends DAO {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("INSERT INTO t_customer(name) VALUES(?)")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("is", $data[0])) {
+		if (!$stmt -> bind_param("s", $data[0])) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {

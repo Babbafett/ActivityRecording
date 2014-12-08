@@ -4,6 +4,10 @@ $dao = new ProjectDAO ();
 
 $dao->connect ();
 
+$jobs = new SubProjectDAO();
+
+$jobs->connect();
+
 $result = $dao->getAllEntrys ();
 
 echo "<table class='table table-hover table-condensed'>";
@@ -46,6 +50,7 @@ foreach ( $result as $row ) {
 	}
 	
 	echo "</td>";
+	
 	echo "</tr>";
 }
 
