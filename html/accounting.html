@@ -24,10 +24,29 @@
 
 		<div class="container">
 			<h1>Get cash</h1>
-			<?php
-			
-			include '../php/pdf.php';
-			?>
+			<form id="calc" class ="form-signin" role="form" action="../php/pdf.php" method="POST">
+				<select id='month' class='form-control' title='Select month' name="month">
+					<option value="1">Januar</option>
+					<option value="2">Februar</option>
+					<option value="3">März</option>
+					<option value="4">April</option>
+					<option value="5">Mai</option>
+					<option value="6">Juni</option>
+					<option value="7">Juli</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">Oktober</option>
+					<option value="11">November</option>
+					<option value="12">Dezember</option>
+				</select>
+				<select id='year' class='form-control' title='Select year' name="year">
+					<option value="2014">2014</option>
+					<option value="2013">2013</option>
+				</select>
+				<br />
+				<input type="submit" class="btn btn-lg btn-primary btn-block" name="calc">
+
+			</form>
 
 		</div>
 

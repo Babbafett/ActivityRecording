@@ -12,8 +12,8 @@ abstract class DAO {
 			return false;
 		} else {
 			/* change character set to utf8 */
-			if (!$conn->set_charset("utf8")) {
-				printf("Error loading character set utf8: %s\n", $conn->error);
+			if (!$conn -> set_charset("utf8")) {
+				printf("Error loading character set utf8: %s\n", $conn -> error);
 			}
 			return true;
 		}
@@ -111,14 +111,14 @@ class ProjectDAO extends DAO {
 class CustomerDAO extends DAO {
 	public function close() {
 		if ($GLOBALS['conn'] != null) {
-			$GLOBALS['conn']->close();
+			$GLOBALS['conn'] -> close();
 		}
 	}
 
 	public function getAllEntrys() {
 		$entrys = null;
-		
-		if (!$stmt = $GLOBALS['conn']->prepare("SELECT * FROM t_customer")) {
+
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_customer")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
 		if (!$stmt -> execute()) {
@@ -388,6 +388,29 @@ class EntryDAO extends DAO {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
 		if (!$stmt -> bind_param("i", $id)) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		$res = $stmt -> get_result();
+		if ($res -> num_rows > 0) {
+			while ($row = $res -> fetch_assoc()) {
+				$entry = $row;
+			}
+		} else {
+			echo "No Data";
+			return false;
+		}
+		return $entry;
+	}
+
+	public function getMonth($data) {
+		$entry = null;
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_entry WHERE MONTH(date) = ? and YEAR(date) = ? ")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("ii", $data[0], $data[1])) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {
