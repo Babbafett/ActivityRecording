@@ -1,4 +1,5 @@
 <?php
+include 'dao.php';
 if (isset($_POST['entry'])) {
 	$entry= new EntryDAO;
 	$entry->connect();
@@ -8,7 +9,7 @@ if (isset($_POST['entry'])) {
 	$data[]=$_POST['date'];
 	$data[]=$_POST['hours'];
 	$data[]=$_POST['cost_type'];
-	$entry->addEntry($data);
-	header("Location: ../html/entry.html");
+	$entry->insertEntry($data);
+	header("Location: ../html/record.html");
 }
 ?>

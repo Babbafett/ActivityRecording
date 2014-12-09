@@ -36,7 +36,7 @@ foreach ( $result as $row ) {
 	
 	echo "<td>";
 	
-	// button: edit customer
+	// button: edit project
 	if (isset ( $row ['k_id'] )) {
 		$params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&edit=1\"";
 		echo "<a class='btn btn-warning' href='#' onclick='openOverlay($site,$params)'><i class='glyphicon glyphicon-pencil'></i> edit</a>";
@@ -58,7 +58,7 @@ foreach ( $result as $row ) {
 echo "</tbody>";
 echo "</table>";
 
-// button: add customer
+// button: add project
 $params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&add=1\"";
 echo "<a class='btn btn-success' href='#' onclick='openOverlay($site,$params)'><i class='glyphicon glyphicon-plus'></i> add project</a>";
 

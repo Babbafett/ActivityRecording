@@ -75,6 +75,29 @@ class ProjectDAO extends DAO {
 		}
 		return $entry;
 	}
+	
+	public function getProjectsFromCustomer($k_id) {
+		$entrys = null;
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_project where k_id = ?")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("i", $k_id)) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		$res = $stmt -> get_result();
+		if ($res -> num_rows > 0) {
+			while ($row = $res -> fetch_assoc()) {
+				$entrys[] = $row;
+			}
+		} else {
+			echo "No Data";
+			return false;
+		}
+		return $entrys;
+	}
 
 	public function insertEntry($data) {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("INSERT INTO t_project(k_id,description) VALUES(?,?)")) {
@@ -321,6 +344,29 @@ class SubProjectDAO extends DAO {
 			return false;
 		}
 		return $entry;
+	}
+	
+	public function getJobsFromProject($p_id) {
+		$entrys = null;
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_sub_project WHERE p_id = ?")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("i", $p_id)) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		$res = $stmt -> get_result();
+		if ($res -> num_rows > 0) {
+			while ($row = $res -> fetch_assoc()) {
+				$entrys[] = $row;
+			}
+		} else {
+			echo "No Data";
+			return false;
+		}
+		return $entrys;
 	}
 
 	public function insertEntry($data) {

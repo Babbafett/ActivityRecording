@@ -26,15 +26,76 @@
 	<div class="row">
 		<div class="col-xs-6 col-md-4"></div>
 		<div class="col-xs-6 col-md-4">
-			<h1>Create entry</h1>
+			<h1>Record activities</h1>
 			
-			<?php
-				include '../php/record.php';
-			?>
+			<form class="form-horizontal" role="form" action="../php/addEntry.php" method="post">
 			
-		</div>
+			<div id="divSelectCustomer" class="form-group">
+			    <label for="inputCustomer" class="col-sm-2 control-label">Customer</label>
+			    <div class="col-sm-10">
+    			<?php
+					include '../php/getCustomers.php';
+				?>
+			    </div>
+			  </div>
+			  
+			  <div id="formSelectProject" class="form-group">
+			    <label for="inputProject" class="col-sm-2 control-label">Project</label>
+			    <div class="col-sm-10">
+			      <div id="divSelectProject"></div>
+			    </div>
+			  </div>
+			  
+			  <div id="formSelectJob" class="form-group">
+			    <label for="inputJob" class="col-sm-2 control-label">Job</label>
+			    <div class="col-sm-10">
+			      <div id="divSelectJob"></div>
+			    </div>
+			  </div>
+			  
+			  <!--the following div is hidden while no job is selected-->
+			  <div id='recordData'>
+				  <div class="form-group">
+				    <label for="input" class="col-sm-2 control-label">Pernr</label>
+				    <div class="col-sm-10">
+				      <input class="form-control" id="inputPernr" placeholder="Pernr" name="pernr">
+				    </div>
+				  </div>
+			   								
+				  <div class="form-group">
+				    <label for="inputDate" class="col-sm-2 control-label">Date</label>
+				    <div class="col-sm-10">
+				      <input class="form-control" id="inputDate" placeholder="Date" name="date">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="inputHours" class="col-sm-2 control-label">Hours</label>
+				    <div class="col-sm-10">
+				      <input class="form-control" id="inputHours" placeholder="Hours" name="hours">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="inputCostType" class="col-sm-2 control-label">Cost type</label>
+				    <div class="col-sm-10">
+				      <input class="form-control" id="inputCostType" placeholder="Cost type" name="cost_type">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="inputCommentary" class="col-sm-2 control-label">Commentary</label>
+				    <div class="col-sm-10">
+				      <input class="form-control" id="inputCommentary" placeholder="Commentary" name="commentary">
+				    </div>
+				  </div>
+				  <button type="submit" class="btn btn-success">Submit</button>
+			  </div>
+			</form>
+		</div>			
+			
 		<div class="col-xs-6 col-md-4"></div>
-	</div>
+		</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
