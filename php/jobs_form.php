@@ -8,16 +8,25 @@ if (isset ( $_GET ['sp_id'] ) and isset ( $_GET ['mode'] )) {
 		
 		echo '<form id="changeJob" class="form-horizontal" role="form" action="../php/changeJob.php" method="post">';
 		
-		echo "<div id='addJob'>";
+		echo "<div id='editJob'>";
+		
+		echo '<div class="form-group">';
+		echo '<label for="inputPosition" class="col-sm-2 control-label">Position</label>';
+		echo '<div class="col-sm-10">';
+		echo "\n";
+		echo '<input class="form-control" id="inputJob" placeholder="Position" name="position" value=' . $result ['position'] . '>';
+		echo '</div>';
+		echo '</div>';
 				
 		echo '<div class="form-group">';
-		echo '<label for="inputJob" class="col-sm-2 control-label">Job description</label>';
+		echo '<label for="inputJob" class="col-sm-2 control-label">Description</label>';
 		echo '<div class="col-sm-10">';
 		echo '<input type="hidden" value ="' . $_GET ['sp_id'] . '" name ="sp_id">';
 		echo "\n";
-		echo '<input class="form-control" id="inputJob" placeholder="Job description" name="description" value=' . $result ['description'] . '>';
+		echo '<input class="form-control" id="inputJob" placeholder="Description" name="description" value=' . $result ['description'] . '>';		
 		echo '</div>';
 		echo '</div>';
+						
 		echo '<input type="submit" class="btn btn-success" name="changeJob" value="Save">';
 		echo '</div>';
 		echo '</form>';

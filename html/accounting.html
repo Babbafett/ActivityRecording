@@ -20,17 +20,19 @@
 
 		<?php
 		include 'navbar.html';
-		?>
+		?>				
 
 		<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
 		<div class="row">
 			<div class="col-xs-6 col-md-4"></div>
 			<div class="col-xs-6 col-md-4">
-				<h1>Get cash</h1>
-				<form id="calc" class="form-signin" role="form"
-				action="../php/pdf.php" method="POST">
-					<select id='month' class='form-control' title='Select month'
-					name="month">
+				<h1>Get cash</h1>								  
+				<form id="calc" class="form-horizontal" role="form" action="../php/pdf.php" method="POST">
+				<div class="form-group">
+					<label for="month" class="col-sm-2 control-label">Month</label>
+					<div class="col-sm-10">
+					<select id='month' class='form-control' title='Select month' name="month">
+						<option selected disabled>Choose month</option>
 						<option value="1">Januar</option>
 						<option value="2">Februar</option>
 						<option value="3">März</option>
@@ -44,15 +46,29 @@
 						<option value="11">November</option>
 						<option value="12">Dezember</option>
 					</select>
+					</div>
+				</div>
+					<div class="form-group">
+					<label for="year" class="col-sm-2 control-label">Year</label>
+					<div class="col-sm-10">
 					<select id='year' class='form-control' title='Select year'
 					name="year">
+					<option selected disabled>Choose year</option>
 						<option value="2014">2014</option>
 						<option value="2013">2013</option>
 					</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="selectProject" class="col-sm-2 control-label">Project</label>
+					<div class="col-sm-10">				
+				
 					<?php
 					include('../php/accounting.php');
 					?>
-					<br />
+				</div>
+				</div>							
 					<input type="submit" class="btn btn-lg btn-primary btn-block" name="calc" value="Create bill">
 				</form>
 			</div>

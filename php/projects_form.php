@@ -9,7 +9,6 @@ if (isset ( $_GET ['p_id'] ) and isset ( $_GET ['mode'] )) {
 		echo '<form id="changeProject" class="form-horizontal" role="form" action="../php/changeProject.php" method="post">';
 		
 		echo "<div id='addProject'>";
-		// echo $result['description'];
 		
 		echo '<div class="form-group">';
 		echo '<label for="inputProject" class="col-sm-2 control-label">Project name</label>';

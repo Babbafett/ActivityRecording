@@ -32,14 +32,14 @@ foreach ( $result as $row ) {
 	echo "<td>";
 	
 	// button: edit project
-	if (isset ( $row ['k_id'] )) {
+	if (isset ( $row ['p_id'] )) {
 		$params = '../html/projects_form.html?p_id=' . $row['p_id'] . '&k_id=' . $row['k_id'] . '&mode=1';
 		echo "<a class='btn btn-warning' href='".$params."'><i class='glyphicon glyphicon-pencil'></i> Edit</a>";
 		echo "	";
 	}
 	
 	// button: delete project
-	if (isset ( $row ['k_id'] )) {
+	if (isset ( $row ['p_id'] )) {
 		$params = '../html/projects_form.html?p_id=' . $row['p_id'] . '&k_id=' . $row['k_id'] . '&mode=2';
 		echo "<a class='btn btn-danger' href='".$params."'><i class='glyphicon glyphicon-remove'></i> Delete</a>";
 		echo "	";

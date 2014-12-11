@@ -20,9 +20,6 @@ if (isset ( $_POST ['k_id'] )) {
 	echo "</select>";
 }
 
-else
-	echo "Fehler";
-
 $project->close ();
 
 ?>

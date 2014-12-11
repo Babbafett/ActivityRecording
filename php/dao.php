@@ -131,7 +131,18 @@ class ProjectDAO extends DAO {
 	}
 
 	public function changeEntry($data) {
-
+		if (!$stmt = $GLOBALS['conn'] -> prepare("UPDATE t_project SET description = ? WHERE p_id = ?")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("si", $data[0], $data[1])) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
@@ -435,7 +446,7 @@ class SubProjectDAO extends DAO {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("DELETE FROM t_sub_project WHERE sp_id = ?")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("i", $data)) {
+		if (!$stmt -> bind_param("i", $id)) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {
@@ -447,9 +458,19 @@ class SubProjectDAO extends DAO {
 	}
 
 	public function changeEntry($data) {
-
+		if (!$stmt = $GLOBALS['conn'] -> prepare("UPDATE t_sub_project SET position = ? , description = ? WHERE sp_id = ?")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("ssi", $data[0], $data[1], $data[2])) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+			return false;
+		} else {
+			return true;
+		}
 	}
-
 }
 
 class EntryDAO extends DAO {

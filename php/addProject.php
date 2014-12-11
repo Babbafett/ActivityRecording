@@ -1,10 +1,11 @@
 <?php
 if (isset($_POST['project'])) {
+	include 'dao.php';
 	$project= new ProjectDAO;
 	$project->connect();
 	$data[]=$_POST['k_id'];
 	$data[]=$_POST['description'];
-	$project->addEntry($data);
+	$project->insertEntry($data);
 	header("Location: ../html/projects.html");
 }
 ?>

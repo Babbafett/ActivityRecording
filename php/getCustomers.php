@@ -2,7 +2,6 @@
 
 include 'dao.php';
 
-// select customer
 $customer = new CustomerDAO ();
 $customer->connect ();
 $result = $customer->getAllEntrys ();

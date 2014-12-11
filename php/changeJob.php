@@ -1,12 +1,12 @@
 <?php
-if (isset($_POST['addJob'])) {
+if (isset($_POST['changeJob'])) {
 	include 'dao.php';
 	$job= new SubProjectDAO;
 	$job->connect();
-	$data[]=$_POST['p_id'];
 	$data[]=$_POST['position'];
 	$data[]=$_POST['description'];
-	$job->insertEntry($data);
+	$data[]=$_POST['sp_id'];
+	$job->changeEntry($data);
 	header("Location: ../html/jobs.html");
 }
 ?>
