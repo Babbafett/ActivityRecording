@@ -1,6 +1,6 @@
 <?php
 include 'dao.php';
-if (isset($_POST['entry'])) {
+if (isset($_POST['record'])) {
 	if (!isset($_SESSION)) {
 		session_start();
 	}
@@ -15,6 +15,6 @@ if (isset($_POST['entry'])) {
 	$data[] = $_POST['hours'];
 	$data[] = $_POST['cost_type'];
 	$entry -> insertEntry($data);
-	header("Location: ../html/record.html");
+	header("Location: ../html/addRecord.html");
 }
 ?>
