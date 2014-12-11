@@ -23,7 +23,7 @@ create table if not exists t_customer
 
 create table if not exists t_project
 (
-    p_id int(4) not null,
+    p_id int(4) not null auto_increment,
     k_id int(5),
     description varchar(30),
     Foreign Key(k_id) references t_customer(k_id) on update cascade on delete restrict,

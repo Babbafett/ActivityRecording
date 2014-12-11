@@ -6,6 +6,6 @@ if (isset($_POST['project'])) {
 	$data[]=$_POST['k_id'];
 	$data[]=$_POST['description'];
 	$project->insertEntry($data);
-	header("Location: ../html/projects.html");
+// 	header("Location: ../html/projects.html");
 }
 ?>
