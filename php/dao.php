@@ -24,6 +24,7 @@ abstract class DAO {
 	public abstract function getEntry($id);
 	public abstract function insertEntry($data);
 	public abstract function deleteEntry($id);
+	public abstract function changeEntry($data);
 }
 
 class ProjectDAO extends DAO {
@@ -129,6 +130,10 @@ class ProjectDAO extends DAO {
 		}
 	}
 
+	public function changeEntry($data) {
+
+	}
+
 }
 
 class CustomerDAO extends DAO {
@@ -186,7 +191,22 @@ class CustomerDAO extends DAO {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("INSERT INTO t_customer(name) VALUES(?)")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("s", $data[0])) {
+		if (!$stmt -> bind_param("s", $data)) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function changeEntry($data) {
+		if (!$stmt = $GLOBALS['conn'] -> prepare("UPDATE t_customer SET name = ? WHERE k_id = ?")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("si", $data[0], $data[1])) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {
@@ -292,6 +312,10 @@ class EmployerDAO extends DAO {
 		} else {
 			return true;
 		}
+	}
+
+	public function changeEntry($data) {
+
 	}
 
 	public function getPW($data) {
@@ -423,6 +447,10 @@ class SubProjectDAO extends DAO {
 		}
 	}
 
+	public function changeEntry($data) {
+
+	}
+
 }
 
 class EntryDAO extends DAO {
@@ -526,6 +554,10 @@ class EntryDAO extends DAO {
 		} else {
 			return true;
 		}
+	}
+
+	public function changeEntry($data) {
+
 	}
 
 }
