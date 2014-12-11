@@ -75,7 +75,7 @@ class ProjectDAO extends DAO {
 		}
 		return $entry;
 	}
-	
+
 	public function getProjectsFromCustomer($k_id) {
 		$entrys = null;
 		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_project where k_id = ?")) {
@@ -294,6 +294,30 @@ class EmployerDAO extends DAO {
 		}
 	}
 
+	public function getPW($data) {
+		$entrys = null;
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT pw, pernr FROM t_employer where email = ?")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("s", $data)) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		$res = $stmt -> get_result();
+		if ($res -> num_rows > 0) {
+			while ($row = $res -> fetch_assoc()) {
+				$entrys = $row;
+			}
+		} else {
+			echo "No Data";
+			return false;
+		}
+		return $entrys;
+
+	}
+
 }
 
 class SubProjectDAO extends DAO {
@@ -345,7 +369,7 @@ class SubProjectDAO extends DAO {
 		}
 		return $entry;
 	}
-	
+
 	public function getJobsFromProject($p_id) {
 		$entrys = null;
 		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_sub_project WHERE p_id = ?")) {
@@ -453,10 +477,10 @@ class EntryDAO extends DAO {
 
 	public function getMonth($data) {
 		$entry = null;
-		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT * FROM t_entry WHERE MONTH(date) = ? and YEAR(date) = ? ")) {
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT cost_type, dates, t_sub_project.description as job, t_project.description as project, hours, pernr, commentary FROM t_entry INNER JOIN t_sub_project on t_entry.sp_id = t_sub_project.sp_id INNER JOIN t_project on t_project.p_id = t_sub_project.p_id WHERE MONTH(dates) = ? and YEAR(dates) = ? and t_project.p_id = ?")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("ii", $data[0], $data[1])) {
+		if (!$stmt -> bind_param("iii", $data[0], $data[1], $data[2])) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {
@@ -465,7 +489,7 @@ class EntryDAO extends DAO {
 		$res = $stmt -> get_result();
 		if ($res -> num_rows > 0) {
 			while ($row = $res -> fetch_assoc()) {
-				$entry = $row;
+				$entry[] = $row;
 			}
 		} else {
 			echo "No Data";
@@ -475,10 +499,10 @@ class EntryDAO extends DAO {
 	}
 
 	public function insertEntry($data) {
-		if (!$stmt = $GLOBALS['conn'] -> prepare("INSERT INTO t_sub_project(pernr, commentary, sp_id, date, hours, cost_type) VALUES(?,?,?,?,?,?)")) {
+		if (!$stmt = $GLOBALS['conn'] -> prepare("INSERT INTO t_entry(pernr, commentary, sp_id, dates, hours, cost_type) VALUES(?,?,?,?,?,?)")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("isisdd", $data[0], $data[1], $data[2], $data[3], $data[4], $data[5])) {
+		if (!$stmt -> bind_param("isisds", $data[0], $data[1], $data[2], $data[3], $data[4], $data[5])) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {

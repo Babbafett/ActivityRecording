@@ -19,7 +19,7 @@ function handleSelectCustomer() {
 	$("#recordData").hide();
 	
 	$.ajax({
-		url : 'http://localhost/php/getProjects.php',
+		url : '../php/getProjects.php',
 		type : 'POST',
 		data : {
 			'k_id' : $('#selectCustomer').val()
@@ -47,7 +47,7 @@ function handleSelectProject() {
 	$("#recordData").hide();
 	
 	$.ajax({
-		url : 'http://localhost/php/getJobs.php',
+		url : '../php/getJobs.php',
 		type : 'POST',
 		data : {
 			'p_id' : $('#selectProject').val()

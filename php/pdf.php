@@ -3,8 +3,9 @@ if (isset($_POST['calc'])) {
 	include 'dao.php';
 	$entry = new EntryDAO();
 	$entry -> connect();
-	$data[] = $_POST['month'];
-	$data[] = $_POST['year'];
+	echo $data[] = $_POST['month'];
+	echo $data[] = $_POST['year'];
+	echo $data[] = $_POST['p_id'];
 	$result = $entry -> getMonth($data);
 	try {
 		$p = new PDFlib();
@@ -25,10 +26,10 @@ if (isset($_POST['calc'])) {
 
 		$p -> setfont($font, 24.0);
 		$p -> set_text_pos(50, 700);
-		$p -> show("Abrechnung " . $_POST['month'] . " " . $_POST['year']);
+		$p -> show("Abrechnung " . $_POST['month'] . ' ' . $_POST['year']);
 		foreach ($result as $row) {
 
-			$p -> continue_text($row['date']);
+			$p -> continue_text($row['dates'].' '.$row['cost_type']. ' '.$row['job'].' '.$row['hours']);
 		}
 		$p -> end_page_ext("");
 

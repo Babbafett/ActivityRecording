@@ -7,6 +7,8 @@ use dbActivityRecording;
 create table if not exists t_employer
 (
     pernr int(4) not null,
+	email varchar(50) not null,
+	pw varchar(30) not null,
     forname varchar(20),
     lastname varchar(40),
     Primary Key(pernr)
@@ -44,7 +46,7 @@ create table if not exists t_entry
     pernr int(4),
     commentary varchar(40),
     sp_id int,
-    Date long,
+	dates date,
     hours double,
     cost_type varchar(3),
     Foreign Key(sp_id) references t_sub_project(sp_id) on update cascade on delete restrict,
