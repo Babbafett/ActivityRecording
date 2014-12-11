@@ -29,7 +29,7 @@ if (isset($_SESSION['Login'])) {
 	echo "\n";
 	echo '<input name="password" type="password" class="form-control" placeholder="Password" required="">';
 	echo "\n";
-	echo '<input type="submit" class="btn btn-lg btn-primary btn-block" name="login">';
+	echo '<input type="submit" class="btn btn-lg btn-primary btn-block" name="login" value="Login">';
 	echo "\n";
 	echo "</form>";
 }

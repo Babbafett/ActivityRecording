@@ -18,7 +18,7 @@ if (isset($_GET['k_id']) and isset($_GET['mode'])) {
 		echo '<input class="form-control" id="inputCustomer" placeholder="Customer Name" name="name" value=' . $result['name'] . '>';
 		echo '</div>';
 		echo '</div>';
-		echo '<input type="submit" class="btn btn-success" name="changeCustomer">';
+		echo '<input type="submit" class="btn btn-success" name="changeCustomer" value="Save">';
 		echo '</div>';
 		echo '</form>';
 		echo "</div>";
@@ -34,12 +34,12 @@ if (isset($_GET['k_id']) and isset($_GET['mode'])) {
 		echo "<div id='addCustomer'>";
 
 		echo '<div class="form-group">';
-		echo '<label for="inputCustomer" class="col-sm-2 control-label">Customer Name</label>';
+		echo '<label for="inputCustomer" class="col-sm-2 control-label">Customer name</label>';
 		echo '<div class="col-sm-10">';
-		echo '<input class="form-control" id="inputCustomer" placeholder="Customer Name" name="name">';
+		echo '<input class="form-control" id="inputCustomer" placeholder="Customer name" name="name">';
 		echo '</div>';
 		echo '</div>';
-		echo '<input type="submit" class="btn btn-success" name="customer">';
+		echo '<input type="submit" class="btn btn-success" name="customer" value="Save">';
 		echo '</div>';
 		echo '</form>';
 		echo "</div>";

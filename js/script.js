@@ -3,6 +3,8 @@ $(document).ready(function() {
 	$("#formSelectProject").hide();
 	$("#formSelectJob").hide();
 	$("#recordData").hide();
+	$("#projectData").hide();
+	$("#jobData").hide();
 });
 
 // register event handler for customer select
@@ -17,6 +19,7 @@ function handleSelectCustomer() {
 	$("#formSelectJob").hide();
 	$('#divSelectJob').html('');
 	$("#recordData").hide();
+	$("#jobData").hide();
 	
 	$.ajax({
 		url : '../php/getProjects.php',
@@ -26,6 +29,7 @@ function handleSelectCustomer() {
 		},
 		success : function(data) {
 			if (data) {
+				$("#projectData").show();
 				$("#formSelectProject").show();
 				$('#divSelectProject').html(data);
 				// register event handler for project select
@@ -45,6 +49,7 @@ function handleSelectProject() {
 	$("#formSelectJob").hide();
 	$('#divSelectJob').html('');
 	$("#recordData").hide();
+	$("#jobData").hide();
 	
 	$.ajax({
 		url : '../php/getJobs.php',
@@ -55,6 +60,7 @@ function handleSelectProject() {
 		success : function(data) {
 			if (data) {
 				$("#formSelectJob").show();
+				$("#jobData").show();
 				$('#divSelectJob').html(data);
 				// register event handler for job select
 				$("#selectJob").change(function() {

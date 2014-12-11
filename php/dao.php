@@ -119,7 +119,7 @@ class ProjectDAO extends DAO {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("DELETE FROM t_project WHERE p_id = ?")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("i", $data)) {
+		if (!$stmt -> bind_param("i", $id)) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {
@@ -221,7 +221,7 @@ class CustomerDAO extends DAO {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("DELETE FROM t_customer WHERE k_id = ?")) {
 			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
 		}
-		if (!$stmt -> bind_param("i", $data)) {
+		if (!$stmt -> bind_param("i", $id)) {
 			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
 		}
 		if (!$stmt -> execute()) {
@@ -231,7 +231,6 @@ class CustomerDAO extends DAO {
 			return true;
 		}
 	}
-
 }
 
 class EmployerDAO extends DAO {

@@ -1,21 +1,21 @@
 <?php
 include 'dao.php';
-$dao = new ProjectDAO ();
+$project = new ProjectDAO ();
 
-$dao->connect ();
+$project->connect ();
 
 $customer = new CustomerDAO();
 
 $customer->connect();
 
-$result = $dao->getAllEntrys ();
+$result = $project->getAllEntrys ();
 
 echo "<table class='table table-hover table-condensed'>";
 // echo "<caption>Manage your customers</caption>";
 echo "<thead>";
 echo "<tr>";
 echo "<th>Customer</th>";
-echo "<th>Description</th>";
+echo "<th>Project description</th>";
 echo "<th></th>";
 echo "</tr>";
 echo "</thead>";
@@ -27,26 +27,21 @@ foreach ( $result as $row ) {
 	echo "<tr>";
 	$resultCust = $customer->getEntry($row['k_id']);
 	echo "<td>" . $resultCust ['name'] . "</td>";
-	echo "<td>" . $row ['description'] . "</td>";
-	
-	$params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&edit=1\"";
-	
-	// parameters for overlay
-	$site = "\"/user_sites/dozent/klausurtermine_overlay.php\""; // TODO: Site hinzufügen
+	echo "<td>" . $row ['description'] . "</td>";	
 	
 	echo "<td>";
 	
 	// button: edit project
 	if (isset ( $row ['k_id'] )) {
-		$params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&edit=1\"";
-		echo "<a class='btn btn-warning' href='#' onclick='openOverlay($site,$params)'><i class='glyphicon glyphicon-pencil'></i> edit</a>";
+		$params = '../html/projects_form.html?p_id=' . $row['p_id'] . '&k_id=' . $row['k_id'] . '&mode=1';
+		echo "<a class='btn btn-warning' href='".$params."'><i class='glyphicon glyphicon-pencil'></i> Edit</a>";
 		echo "	";
 	}
 	
-	// button: delete customer
+	// button: delete project
 	if (isset ( $row ['k_id'] )) {
-		$params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&delete=1\"";
-		echo "<a class='btn btn-danger' href='#' onclick='openOverlay($site,$params)'><i class='glyphicon glyphicon-remove'></i> delete</a>";
+		$params = '../html/projects_form.html?p_id=' . $row['p_id'] . '&k_id=' . $row['k_id'] . '&mode=2';
+		echo "<a class='btn btn-danger' href='".$params."'><i class='glyphicon glyphicon-remove'></i> Delete</a>";
 		echo "	";
 	}
 	
@@ -59,7 +54,7 @@ echo "</tbody>";
 echo "</table>";
 
 // button: add project
-$params = "\"p_id=" . $row ['p_id'] . "&k_id=" . $row ['k_id'] . "&add=1\"";
-echo "<a class='btn btn-success' href='#' onclick='openOverlay($site,$params)'><i class='glyphicon glyphicon-plus'></i> add project</a>";
+$params = '../html/addProject.html';
+echo "<a class='btn btn-success' href='".$params."'><i class='glyphicon glyphicon-plus'></i> Add project</a>";
 
 ?>
