@@ -1,7 +1,7 @@
 <?php
 if (isset ( $_GET ['p_id'] ) and isset ( $_GET ['mode'] )) {
 	if ($_GET ['mode'] == 1) {
-		include 'dao.php';
+		include_once 'dao.php';
 		$project = new ProjectDAO ();
 		$project->connect ();
 		$result = $project->getEntry ( $_GET ['p_id'] );
@@ -23,7 +23,7 @@ if (isset ( $_GET ['p_id'] ) and isset ( $_GET ['mode'] )) {
 		echo '</form>';
 		echo "</div>";
 	} elseif ($_GET ['mode'] == 2) {
-		include 'dao.php';
+		include_once 'dao.php';
 		$project = new ProjectDAO ();
 		$project->connect ();
 		$project->deleteEntry ( $_GET ['p_id'] );

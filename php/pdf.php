@@ -1,8 +1,11 @@
 <?php
 if (isset($_POST['calc'])) {
-	include 'dao.php';
+	include_once 'dao.php';
 	$entry = new EntryDAO();
 	$entry -> connect();
+	$data[]=$_POST['month'];
+	$data[]=$_POST['year'];
+	$data[]=$_POST['p_id'];
 	$result = $entry -> getMonth($data);
 	if (!empty($result)) {
 		try {

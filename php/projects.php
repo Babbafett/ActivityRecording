@@ -1,5 +1,5 @@
 <?php
-include 'dao.php';
+include_once 'dao.php';
 $project = new ProjectDAO ();
 
 $project->connect ();

@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
 }
 if (isset($_POST)) {
 	if (isset($_POST["password"])) {
-		include 'dao.php';
+		include_once 'dao.php';
 		$employer = new EmployerDAO();
 		$employer -> connect();
 		$result = $employer -> getPW($_POST['email']);

@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['changeProject'])) {
-	include 'dao.php';
+	include_once 'dao.php';
 	$project= new ProjectDAO;
 	$project->connect();
 	$data[]=$_POST['description'];

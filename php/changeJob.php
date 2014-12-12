@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['changeJob'])) {
-	include 'dao.php';
+	include_once 'dao.php';
 	$job= new SubProjectDAO;
 	$job->connect();
 	$data[]=$_POST['position'];

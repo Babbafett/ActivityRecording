@@ -1,5 +1,5 @@
 <?php
-include 'dao.php';
+include_once 'dao.php';
 $customers = new CustomerDAO ();
 
 $customers->connect ();
