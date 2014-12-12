@@ -3,9 +3,9 @@ if (isset($_POST['calc'])) {
 	include_once 'dao.php';
 	$entry = new EntryDAO();
 	$entry -> connect();
-	$data[]=$_POST['month'];
-	$data[]=$_POST['year'];
-	$data[]=$_POST['p_id'];
+	$data[] = $_POST['month'];
+	$data[] = $_POST['year'];
+	$data[] = $_POST['p_id'];
 	$result = $entry -> getMonth($data);
 	if (!empty($result)) {
 		try {
@@ -26,11 +26,26 @@ if (isset($_POST['calc'])) {
 			$font = $p -> load_font("Helvetica-Bold", "winansi", "");
 
 			$p -> setfont($font, 24.0);
-			$p -> set_text_pos(50, 700);
+			$p -> set_text_pos(30, 700);
 			$p -> show("Abrechnung " . $_POST['month'] . ' ' . $_POST['year']);
+			$gesamt = null;
+			$position = 690;
 			foreach ($result as $row) {
-
-				$p -> continue_text($row['dates'] . ' ' . $row['cost_type'] . ' ' . $row['job'] . ' ' . $row['hours']);
+				$p -> set_text_pos(40, $position);
+				$p -> setfont($font, 10);
+				$gesamt += $row['hours'];
+				$p -> continue_text('Datum ' . $row['dates'] . ' Verrechnung: ' . $row['cost_type'] . ' Aufgabe: ' . $row['job'] . ' ' . $row['hours'] . ' Stunden');
+				$position -= 10;
+			}
+			$position -= 10;
+			$p -> set_text_pos(30, $position);
+			$p -> setfont($font, 14);
+			$position -= 10;
+			$p -> set_text_pos(30, $position);
+			$p -> continue_text('Gesamtstunden ' . $gesamt);
+			$resultHours = $entry -> getHours($data);
+			foreach ($resultHours as $rowHours) {
+				$p -> continue_text('Verrechnungsart ' . $rowHours['cost_type'] . ' ' . $rowHours['Hours'] . ' Stunden');
 			}
 			$p -> end_page_ext("");
 
@@ -50,10 +65,9 @@ if (isset($_POST['calc'])) {
 		}
 		$p = 0;
 
+	} else {
+		echo 'alert("no entrys in this period")';
+		header("Location: ../html/accounting.html");
 	}
-else {
-	echo 'alert("no entrys in this period")';
-	header("Location: ../html/accounting.html");
-}
 }
 ?>

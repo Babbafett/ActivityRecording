@@ -545,6 +545,28 @@ class EntryDAO extends DAO {
 		}
 		return $entry;
 	}
+		public function getHours($data) {
+		$entry = null;
+		if (!$stmt = $GLOBALS['conn'] -> prepare("SELECT SUM(hours) as Hours,cost_type FROM t_entry INNER JOIN t_sub_project on t_entry.sp_id = t_sub_project.sp_id INNER JOIN t_project on t_project.p_id = t_sub_project.p_id WHERE MONTH(dates) = ? and YEAR(dates) = ? and t_project.p_id = ? GROUP BY cost_type")) {
+			echo "Prepare failed: (" . $GLOBALS['conn'] -> errno . ") " . $GLOBALS['conn'] -> error;
+		}
+		if (!$stmt -> bind_param("iii", $data[0], $data[1], $data[2])) {
+			echo "Binding parameters failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		if (!$stmt -> execute()) {
+			echo "Execute failed: (" . $stmt -> errno . ") " . $stmt -> error;
+		}
+		$res = $stmt -> get_result();
+		if ($res -> num_rows > 0) {
+			while ($row = $res -> fetch_assoc()) {
+				$entry[] = $row;
+			}
+		} else {
+			echo "No Data";
+			return false;
+		}
+		return $entry;
+	}
 
 	public function insertEntry($data) {
 		if (!$stmt = $GLOBALS['conn'] -> prepare("INSERT INTO t_entry(pernr, commentary, sp_id, dates, hours, cost_type) VALUES(?,?,?,?,?,?)")) {
